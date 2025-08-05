@@ -6,7 +6,6 @@ import React, {
   ClipboardEvent,
   FocusEvent,
   ChangeEvent,
-  RefObject,
 } from "react";
 
 export interface GlassOtpInputProps {
@@ -89,7 +88,9 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       inputRefs.current[index + 1]?.focus();
     }
 
-    onChange?.(newOtp.join(""));
+    if (onChange) {
+      onChange(newOtp.join(""));
+    }
     setSubmitAttempted(false); // Reset submit attempt on change
   };
 
@@ -98,10 +99,12 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     } else if (e.key === "Backspace" && e.ctrlKey) {
-      const newOtp = Array(length).fill("");
+      const newOtp = Array<string>(length).fill("");
       setOtp(newOtp);
       inputRefs.current[0]?.focus();
-      onChange?.("");
+      if (onChange) {
+        onChange("");
+      }
       setSubmitAttempted(false);
     } else if (e.key === "Enter") {
       handleSubmit();
@@ -114,7 +117,7 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
     const pastedData = e.clipboardData.getData("text").replace(/\D/g, "");
 
     if (pastedData.length) {
-      const newOtp = Array(length).fill("");
+      const newOtp = Array<string>(length).fill("");
       const pasteLength = Math.min(pastedData.length, length);
 
       for (let i = 0; i < pasteLength; i++) {
@@ -124,7 +127,9 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       setOtp(newOtp);
       const nextFocusIndex = Math.min(pasteLength, length - 1);
       inputRefs.current[nextFocusIndex]?.focus();
-      onChange?.(newOtp.join(""));
+      if (onChange) {
+        onChange(newOtp.join(""));
+      }
       setSubmitAttempted(false);
     }
   };
@@ -143,8 +148,10 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
   // Handle submit attempt
   const handleSubmit = () => {
     setSubmitAttempted(true);
-    if (otp.every((val) => val !== "")) {
-      onSubmit?.(otp.join(""));
+    if (otp.every((val: string) => val !== "")) {
+      if (onSubmit) {
+        onSubmit(otp.join(""));
+      }
     }
   };
 
