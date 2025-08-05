@@ -29,10 +29,14 @@ export function handleGenericError(error: any): string {
       }
       // message or detail as array
       if (Array.isArray(data?.message) && data.message.length > 0) {
-        return typeof data.message[0] === "string" ? data.message[0] : JSON.stringify(data.message[0]);
+        return typeof data.message[0] === "string"
+          ? data.message[0]
+          : JSON.stringify(data.message[0]);
       }
       if (Array.isArray(data?.detail) && data.detail.length > 0) {
-        return typeof data.detail[0] === "string" ? data.detail[0] : JSON.stringify(data.detail[0]);
+        return typeof data.detail[0] === "string"
+          ? data.detail[0]
+          : JSON.stringify(data.detail[0]);
       }
       // Field errors (Django/DRF, etc.)
       const fieldError = Object.values(data)
@@ -45,9 +49,11 @@ export function handleGenericError(error: any): string {
 
     // Fallback for known status codes
     if (status === 401) return "Unauthorized. Please log in again.";
-    if (status === 403) return "You do not have permission to perform this action.";
+    if (status === 403)
+      return "You do not have permission to perform this action.";
     if (status === 404) return "Resource not found.";
-    if (status === 500) return "A server error occurred. Please try again later.";
+    if (status === 500)
+      return "A server error occurred. Please try again later.";
 
     // Generic fallback
     return "An error occurred. Please try again.";
@@ -86,4 +92,3 @@ export function handleGenericError(error: any): string {
   // Unknown error
   return "An unexpected error occurred. Please try again.";
 }
-

@@ -18,7 +18,11 @@ interface TabsTriggerProps {
   className?: string;
 }
 
-export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className }) => {
+export const TabsTrigger: React.FC<TabsTriggerProps> = ({
+  value,
+  children,
+  className,
+}) => {
   const { activeTab, setActiveTab } = useTabsContext();
 
   return (
@@ -44,7 +48,11 @@ interface TabsContentProps {
   className?: string;
 }
 
-export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className }) => {
+export const TabsContent: React.FC<TabsContentProps> = ({
+  value,
+  children,
+  className,
+}) => {
   const { activeTab } = useTabsContext();
 
   if (value !== activeTab) return null;

@@ -1,2 +1,2 @@
-bun lint-staged
-bun build
+bunx lint-staged
+bun run build

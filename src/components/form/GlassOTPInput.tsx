@@ -67,7 +67,8 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       ? initialValue
           .slice(0, length)
           .split("")
-          .concat(Array(length).fill("")).slice(0, length)
+          .concat(Array(length).fill(""))
+          .slice(0, length)
       : Array(length).fill("")
   );
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -158,7 +159,6 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
   // Focus first input on mount
   useEffect(() => {
     inputRefs.current[0]?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Determine if input should show error state
@@ -173,10 +173,10 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       isError
         ? "border-red-500 ring-2 ring-red-500/20"
         : focusedIndex === index
-        ? "border-blue-350 ring-2 ring-blue-350/20"
-        : isFilled
-        ? "border-gray-200"
-        : "border-ash",
+          ? "border-blue-350 ring-2 ring-blue-350/20"
+          : isFilled
+            ? "border-gray-200"
+            : "border-ash",
       "backdrop-blur-sm",
       focusedIndex === index ? "shadow-lg" : "",
       className,
@@ -229,19 +229,19 @@ export default GlassOtpInput;
 
 /**
  * Usage Example:
- * 
+ *
  * import React, { useState } from "react";
  * import GlassOtpInput from "./GlassOTPInput";
- * 
+ *
  * export default function Demo() {
  *   const [otp, setOtp] = useState("");
  *   const [error, setError] = useState(false);
- * 
+ *
  *   const handleOtpChange = (val: string) => {
  *     setOtp(val);
  *     setError(false);
  *   };
- * 
+ *
  *   const handleOtpSubmit = (val: string) => {
  *     if (val === "1234") {
  *       alert("OTP Verified!");
@@ -249,7 +249,7 @@ export default GlassOtpInput;
  *       setError(true);
  *     }
  *   };
- * 
+ *
  *   return (
  *     <div>
  *       <GlassOtpInput

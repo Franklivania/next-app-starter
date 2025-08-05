@@ -31,7 +31,9 @@ const Table: React.FC<TableProps> = ({
       >
         {columns.map(({ render, key }, id) => (
           <td key={`data-${i}-${id}`} className="py-4 px-4 text-[16px]">
-            {render ? render(rowData, i) : rowData[key] ?? "-"}
+            {render
+              ? render(rowData, i)
+              : ((rowData[key] as React.ReactNode) ?? "-")}
           </td>
         ))}
       </tr>

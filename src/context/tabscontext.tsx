@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useContext, useEffect, ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface TabsContextType {

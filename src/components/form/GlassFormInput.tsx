@@ -3,7 +3,8 @@ import { useState, forwardRef, useMemo, InputHTMLAttributes } from "react";
 import { Icon } from "@iconify/react";
 
 // Define the props interface for type safety and better DX
-export interface GlassFormInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface GlassFormInputProps
+  extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   icon?: string;
@@ -32,11 +33,7 @@ const GlassFormInput = forwardRef<HTMLInputElement, GlassFormInputProps>(
     );
 
     const inputType = type === "password" && isPasswordVisible ? "text" : type;
-    const borderColor = error
-      ? "#FF0000"
-      : isFocused
-      ? "#675BA3"
-      : "#3F4155";
+    const borderColor = error ? "#FF0000" : isFocused ? "#675BA3" : "#3F4155";
 
     return (
       <div className={`relative w-full ${mainClassName}`}>
@@ -74,13 +71,17 @@ const GlassFormInput = forwardRef<HTMLInputElement, GlassFormInputProps>(
               tabIndex={-1}
             >
               <Icon
-                icon={isPasswordVisible ? "mdi:eye-outline" : "mdi:eye-off-outline"}
+                icon={
+                  isPasswordVisible ? "mdi:eye-outline" : "mdi:eye-off-outline"
+                }
                 width={20}
               />
             </button>
           )}
         </div>
-        {error && <span className="text-red-600 text-sm mt-1 block">{error}</span>}
+        {error && (
+          <span className="text-red-600 text-sm mt-1 block">{error}</span>
+        )}
       </div>
     );
   }

@@ -12,15 +12,15 @@ export default function Backdrop({ show, onClose }: BackdropProps) {
     if (show) {
       setVisible(true);
       // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
       setTimeout(() => setVisible(false), 200);
       // Restore body scroll when modal is closed
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [show]);
 

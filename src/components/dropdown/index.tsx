@@ -200,10 +200,7 @@ const Dropdown = ({
         <Icon
           icon="mdi:chevron-down"
           width={24}
-          className={cn(
-            "ml-auto transition-transform",
-            isOpen && "rotate-180"
-          )}
+          className={cn("ml-auto transition-transform", isOpen && "rotate-180")}
           aria-hidden="true"
         />
       </button>

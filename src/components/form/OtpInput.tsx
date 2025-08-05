@@ -58,10 +58,7 @@ const OtpInput: FC<OtpInputProps> = ({
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   // Handle input change
-  const handleChange = (
-    value: string,
-    index: number
-  ) => {
+  const handleChange = (value: string, index: number) => {
     if (!/^\d*$/.test(value)) return; // Allow only digits
 
     const newOtp = [...otp];
@@ -80,19 +77,14 @@ const OtpInput: FC<OtpInputProps> = ({
   };
 
   // Handle keydown (backspace)
-  const handleKeyDown = (
-    e: KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === "Backspace" && !otp[index]) {
       if (index > 0) inputRefs.current[index - 1]?.focus();
     }
   };
 
   // Handle paste event
-  const handlePaste = (
-    e: ClipboardEvent<HTMLInputElement>
-  ) => {
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text").slice(0, length);
     if (!/^\d*$/.test(pastedData)) return;

@@ -1,4 +1,11 @@
-import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions, QueryKey } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  UseQueryOptions,
+  UseMutationOptions,
+  QueryKey,
+} from "@tanstack/react-query";
 import { handleGenericError } from "@/lib/error-handler";
 import {
   deleteData,
@@ -12,7 +19,10 @@ import { toast } from "sonner";
 /**
  * Helper to invalidate queries by key (handles string or array)
  */
-const invalidateQuery = (queryClient: ReturnType<typeof useQueryClient>, queryKey: QueryKey | string | undefined) => {
+const invalidateQuery = (
+  queryClient: ReturnType<typeof useQueryClient>,
+  queryKey: QueryKey | string | undefined
+) => {
   if (!queryKey) return;
   if (Array.isArray(queryKey)) {
     queryClient.invalidateQueries({ queryKey });
@@ -29,7 +39,6 @@ const handleMutationError = (error: unknown) => {
   toast.error(errorMessage);
   // Optionally log error for debugging
   if (process.env.NODE_ENV !== "production") {
-    // eslint-disable-next-line no-console
     console.error(errorMessage);
   }
   throw new Error(errorMessage);
@@ -41,7 +50,10 @@ const handleMutationError = (error: unknown) => {
 export function useFetchData<T = unknown>(
   endpoint: string,
   queryKey: QueryKey | string,
-  options: Omit<UseQueryOptions<T, unknown, T, QueryKey>, "queryKey" | "queryFn"> = {}
+  options: Omit<
+    UseQueryOptions<T, unknown, T, QueryKey>,
+    "queryKey" | "queryFn"
+  > = {}
 ) {
   return useQuery<T, unknown, T, QueryKey>({
     queryKey: [queryKey, endpoint].filter(Boolean) as QueryKey,
