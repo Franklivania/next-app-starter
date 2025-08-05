@@ -189,15 +189,15 @@ export default DragAndDropFile;
 
 /**
  * How to use the DragAndDropFile component:
- * 
+ *
  * Example:
- * 
+ *
  * import DragAndDropFile from "@/components/dragDrop";
  * import { useState } from "react";
- * 
+ *
  * function Example() {
  *   const [file, setFile] = useState<File | File[] | null>(null);
- * 
+ *
  *   return (
  *     <DragAndDropFile
  *       onFileDrop={setFile}
@@ -210,7 +210,7 @@ export default DragAndDropFile;
  *     />
  *   );
  * }
- * 
+ *
  * Props:
  * - onFileDrop: (file: File | File[] | null) => void (required)
  * - accept?: string (optional, accepted file types, e.g. "image/*")

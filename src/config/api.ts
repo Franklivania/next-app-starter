@@ -7,7 +7,10 @@ export const fetchData = async <T = unknown>(
   queryParams?: QueryParams,
   options: { headers?: Record<string, string> } = {}
 ): Promise<T> => {
-  const response = await apiFetch<T>(endpoint, "GET", { queryParams, ...options });
+  const response = await apiFetch<T>(endpoint, "GET", {
+    queryParams,
+    ...options,
+  });
   return response.data;
 };
 
@@ -16,7 +19,10 @@ export const postData = async <T = unknown, B = unknown>(
   data?: B,
   options: { headers?: Record<string, string>; isMultipart?: boolean } = {}
 ): Promise<T> => {
-  const response = await apiFetch<T, B>(endpoint, "POST", { body: data, ...options });
+  const response = await apiFetch<T, B>(endpoint, "POST", {
+    body: data,
+    ...options,
+  });
   return response.data;
 };
 
@@ -25,7 +31,10 @@ export const updateData = async <T = unknown, B = unknown>(
   data?: B,
   options: { headers?: Record<string, string>; isMultipart?: boolean } = {}
 ): Promise<T> => {
-  const response = await apiFetch<T, B>(endpoint, "PUT", { body: data, ...options });
+  const response = await apiFetch<T, B>(endpoint, "PUT", {
+    body: data,
+    ...options,
+  });
   return response.data;
 };
 
@@ -34,7 +43,10 @@ export const patchData = async <T = unknown, B = unknown>(
   data?: B,
   options: { headers?: Record<string, string>; isMultipart?: boolean } = {}
 ): Promise<T> => {
-  const response = await apiFetch<T, B>(endpoint, "PATCH", { body: data, ...options });
+  const response = await apiFetch<T, B>(endpoint, "PATCH", {
+    body: data,
+    ...options,
+  });
   return response.data;
 };
 

@@ -5,7 +5,7 @@ export type ActionItem = {
   id: string | number;
   icon?: React.ReactNode | string;
   label: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type ActionsProps = {

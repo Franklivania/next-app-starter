@@ -8,7 +8,9 @@ interface UseMaxLengthProps {
 interface UseMaxLengthReturn {
   value: string;
   charCount: number;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   remainingChars: number | undefined;
 }
 

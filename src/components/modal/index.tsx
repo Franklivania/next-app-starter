@@ -5,7 +5,7 @@ import Backdrop from "./Backdrop";
 import ModalHeader from "./ModalHeader";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
-export type ModalVariant = 'default' | 'side' | 'float';
+export type ModalVariant = "default" | "side" | "float";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface ModalProps {
   title: string;
   desc?: string;
   variant?: ModalVariant;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   closeModal: () => void;
   className?: string;
 }
@@ -23,10 +23,10 @@ export default function Modal({
   show,
   title,
   desc,
-  variant = 'default',
-  size = 'medium',
+  variant = "default",
+  size = "medium",
   closeModal,
-  className = '',
+  className = "",
 }: ModalProps) {
   const [delayShow, setDelayShow] = useState(false);
 
@@ -44,24 +44,24 @@ export default function Modal({
   // Size classes
   const sizeClasses = {
     small: {
-      default: 'w-[90%] max-w-md',
-      side: 'w-[35%]',
-      float: 'max-w-sm'
+      default: "w-[90%] max-w-md",
+      side: "w-[35%]",
+      float: "max-w-sm",
     },
     medium: {
-      default: 'w-[95%] max-w-2xl',
-      side: 'w-[50%]',
-      float: 'max-w-md'
+      default: "w-[95%] max-w-2xl",
+      side: "w-[50%]",
+      float: "max-w-md",
     },
     large: {
-      default: 'w-[95%] max-w-5xl',
-      side: 'w-[65%]',
-      float: 'max-w-lg'
-    }
+      default: "w-[95%] max-w-5xl",
+      side: "w-[65%]",
+      float: "max-w-lg",
+    },
   };
 
   // Variant-specific components
-  if (variant === 'side') {
+  if (variant === "side") {
     return (
       <Fragment>
         <Backdrop show={show} onClose={closeModal} />
@@ -87,7 +87,7 @@ export default function Modal({
     );
   }
 
-  if (variant === 'float') {
+  if (variant === "float") {
     return (
       <Fragment>
         <Backdrop show={show} onClose={closeModal} />
@@ -99,11 +99,7 @@ export default function Modal({
           `}
           ref={ref}
         >
-          <ModalHeader 
-            title={title} 
-            desc={desc} 
-            closeModal={closeModal} 
-          />
+          <ModalHeader title={title} desc={desc} closeModal={closeModal} />
           <div className="w-full flex-1 overflow-y-auto py-2 modal-scrollbar">
             {children}
           </div>
@@ -125,11 +121,7 @@ export default function Modal({
         ref={ref}
       >
         <div className="w-full h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-6 py-6 flex flex-col gap-4 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden">
-          <ModalHeader 
-            title={title} 
-            desc={desc} 
-            closeModal={closeModal} 
-          />
+          <ModalHeader title={title} desc={desc} closeModal={closeModal} />
           <div className="w-full flex-1 overflow-y-auto modal-scrollbar">
             {children}
           </div>
@@ -139,18 +131,17 @@ export default function Modal({
   );
 }
 
-
 /**
  * How to use the Modal component:
- * 
+ *
  * Example:
- * 
+ *
  * import Modal from './modal';
  * import { useState } from 'react';
- * 
+ *
  * function Example() {
  *   const [open, setOpen] = useState(false);
- * 
+ *
  *   return (
  *     <>
  *       <button onClick={() => setOpen(true)}>
@@ -169,7 +160,7 @@ export default function Modal({
  *     </>
  *   );
  * }
- * 
+ *
  * Props:
  * - show: boolean (controls modal visibility)
  * - closeModal: function (called to close the modal)

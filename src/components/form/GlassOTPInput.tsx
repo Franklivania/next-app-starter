@@ -6,7 +6,6 @@ import React, {
   ClipboardEvent,
   FocusEvent,
   ChangeEvent,
-  RefObject,
 } from "react";
 
 export interface GlassOtpInputProps {
@@ -68,7 +67,8 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       ? initialValue
           .slice(0, length)
           .split("")
-          .concat(Array(length).fill("")).slice(0, length)
+          .concat(Array(length).fill(""))
+          .slice(0, length)
       : Array(length).fill("")
   );
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -89,7 +89,9 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       inputRefs.current[index + 1]?.focus();
     }
 
-    onChange?.(newOtp.join(""));
+    if (onChange) {
+      onChange(newOtp.join(""));
+    }
     setSubmitAttempted(false); // Reset submit attempt on change
   };
 
@@ -98,10 +100,12 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     } else if (e.key === "Backspace" && e.ctrlKey) {
-      const newOtp = Array(length).fill("");
+      const newOtp = Array<string>(length).fill("");
       setOtp(newOtp);
       inputRefs.current[0]?.focus();
-      onChange?.("");
+      if (onChange) {
+        onChange("");
+      }
       setSubmitAttempted(false);
     } else if (e.key === "Enter") {
       handleSubmit();
@@ -114,7 +118,7 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
     const pastedData = e.clipboardData.getData("text").replace(/\D/g, "");
 
     if (pastedData.length) {
-      const newOtp = Array(length).fill("");
+      const newOtp = Array<string>(length).fill("");
       const pasteLength = Math.min(pastedData.length, length);
 
       for (let i = 0; i < pasteLength; i++) {
@@ -124,7 +128,9 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       setOtp(newOtp);
       const nextFocusIndex = Math.min(pasteLength, length - 1);
       inputRefs.current[nextFocusIndex]?.focus();
-      onChange?.(newOtp.join(""));
+      if (onChange) {
+        onChange(newOtp.join(""));
+      }
       setSubmitAttempted(false);
     }
   };
@@ -143,15 +149,16 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
   // Handle submit attempt
   const handleSubmit = () => {
     setSubmitAttempted(true);
-    if (otp.every((val) => val !== "")) {
-      onSubmit?.(otp.join(""));
+    if (otp.every((val: string) => val !== "")) {
+      if (onSubmit) {
+        onSubmit(otp.join(""));
+      }
     }
   };
 
   // Focus first input on mount
   useEffect(() => {
     inputRefs.current[0]?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Determine if input should show error state
@@ -166,10 +173,10 @@ const GlassOtpInput: React.FC<GlassOtpInputProps> = ({
       isError
         ? "border-red-500 ring-2 ring-red-500/20"
         : focusedIndex === index
-        ? "border-blue-350 ring-2 ring-blue-350/20"
-        : isFilled
-        ? "border-gray-200"
-        : "border-ash",
+          ? "border-blue-350 ring-2 ring-blue-350/20"
+          : isFilled
+            ? "border-gray-200"
+            : "border-ash",
       "backdrop-blur-sm",
       focusedIndex === index ? "shadow-lg" : "",
       className,
@@ -222,19 +229,19 @@ export default GlassOtpInput;
 
 /**
  * Usage Example:
- * 
+ *
  * import React, { useState } from "react";
  * import GlassOtpInput from "./GlassOTPInput";
- * 
+ *
  * export default function Demo() {
  *   const [otp, setOtp] = useState("");
  *   const [error, setError] = useState(false);
- * 
+ *
  *   const handleOtpChange = (val: string) => {
  *     setOtp(val);
  *     setError(false);
  *   };
- * 
+ *
  *   const handleOtpSubmit = (val: string) => {
  *     if (val === "1234") {
  *       alert("OTP Verified!");
@@ -242,7 +249,7 @@ export default GlassOtpInput;
  *       setError(true);
  *     }
  *   };
- * 
+ *
  *   return (
  *     <div>
  *       <GlassOtpInput

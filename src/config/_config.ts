@@ -20,9 +20,7 @@ function getAuthTokenFromCookies(): string | null {
   if (typeof window === "undefined") return null;
   try {
     const cookies = document.cookie.split("; ");
-    const tokenCookie = cookies.find((c) =>
-      c.startsWith("token=")
-    );
+    const tokenCookie = cookies.find((c) => c.startsWith("token="));
     if (tokenCookie) {
       return decodeURIComponent(tokenCookie.split("=")[1]);
     }
@@ -36,7 +34,9 @@ function buildUrl(
   endpoint: string,
   queryParams?: Record<string, string | number | boolean | undefined>
 ): string {
-  let url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
+  let url = endpoint.startsWith("http")
+    ? endpoint
+    : `${API_BASE_URL}${endpoint}`;
   if (queryParams && Object.keys(queryParams).length > 0) {
     const params = new URLSearchParams();
     Object.entries(queryParams).forEach(([k, v]) => {

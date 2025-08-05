@@ -31,8 +31,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       []
     );
 
-    const inputType =
-      type === "password" && isPasswordVisible ? "text" : type;
+    const inputType = type === "password" && isPasswordVisible ? "text" : type;
 
     return (
       <div className={cn("relative w-full", mainClassName)}>
@@ -80,9 +79,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             >
               <Icon
                 icon={
-                  isPasswordVisible
-                    ? "mdi:eye-outline"
-                    : "mdi:eye-off-outline"
+                  isPasswordVisible ? "mdi:eye-outline" : "mdi:eye-off-outline"
                 }
                 width={24}
                 height={24}
