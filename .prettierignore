@@ -1,0 +1,49 @@
+# Ignore build output and dependencies
+node_modules
+.next
+out
+dist
+build
+public
+
+*.md
+*.css
+*.scss
+
+# Ignore Vercel and Netlify build output/config
+.vercel/
+vercel.json
+netlify.toml
+netlify/
+netlify/functions/
+netlify-build/
+
+# Ignore lock files
+package-lock.json
+bun.lockb
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore coverage and test output
+coverage
+*.log
+
+# Ignore misc
+.DS_Store
+
+# Ignore Husky hooks
+.husky/
+
+# Ignore GitHub workflows
+.github/
+
+# Ignore Prettier config itself
+.prettierrc
+.prettierignore
+
+# Ignore Next.js config
+next.config.mjs
